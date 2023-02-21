@@ -1,3 +1,5 @@
+import { appendChildrenList, makeDOMwithProperties } from "./utils/dom.js";
+
 const getProductCard = (
     imgSrc,
     name,
@@ -54,16 +56,18 @@ const getProductCard = (
     
     const productPrice = makeDOMwithProperties('div',{
         className : 'product-price',
-        innerHTML : `${price.toLocaleString}원`,
+        innerHTML : `${price.toLocaleString()}원`,
     })
     
     const productOriginalPrice = makeDOMwithProperties('div',{
         className : 'product-original-price',
-        innerHTML : `${originalPrice.toLocaleString}원`,
+        innerHTML : `${originalPrice.toLocaleString()}원`,
     })
     
     appendChildrenList(productPriceCon, [productDiscountPercent, productPrice]);
     appendChildrenList(productDescription, [productName, productPriceCon, productOriginalPrice]);
     
     appendChildrenList(productCard, [productImageCon, productDescription]);
+
+    return productCard;
 };
