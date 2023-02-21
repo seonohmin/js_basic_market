@@ -5,7 +5,7 @@ export const makeDOMwithProperties = (domType, propertyMap) => {
     });
     return dom;
 };
-//test! home!
+//test! office
 export const appendChildrenList = (target, childrenList) => {
     if (!Array.isArray(childrenList)) return;
 
