@@ -1,6 +1,6 @@
 import { makeDOMwithProperties } from '../utils/dom.js';
 import { getCartToggleButton } from './cartToggleButton.js';
-// import { getCartToggleButton } from './cartToggleButton.js';
+
 export const getProductCard = ({
   id,
   imgSrc,
@@ -16,19 +16,16 @@ export const getProductCard = ({
     src: imgSrc,
     alt: '상품 이미지',
   });
-
-  getCartToggleButton();
-
-//   const cartToggleBtn = getCartToggleButton({
-//     id,
-//     imgSrc,
-//     name,
-//     discountPercent,
-//     price,
-//     originalPrice,
-//   }, cartRemoveCallback);
+  const cartToggleBtn = getCartToggleButton({
+    id,
+    imgSrc,
+    name,
+    discountPercent,
+    price,
+    originalPrice,
+  }, cartRemoveCallback);
   productImageCon.appendChild(productImage);
-//   productImageCon.appendChild(cartToggleBtn);
+  productImageCon.appendChild(cartToggleBtn);
   // --- product-image-con ---
   // --- product-description ---
   const productDescription = makeDOMwithProperties('div', {
