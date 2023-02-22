@@ -1,14 +1,15 @@
 import { makeDOMwithProperties } from '../utils/dom.js';
 import { CART_COOKIE_KEY } from '../constants/cart.js';
 
+export const getCartInfo = () => JSON.parse(localStorage.getItem(CART_COOKIE_KEY)) || [];
+
 const isInCart = ({ id }) => {
-    const originalCartInfo = JSON.parse(localStorage.getItem(CART_COOKIE_KEY)) || [];
+    const originalCartInfo = getCartInfo();
     return !!originalCartInfo.find((cartInfo) => cartInfo.id === id); // true, false boolean값으로 명시적 형변환과 같다.
 };
 
 const addCartInfo = (productInfo) => {
-    console.log('add');
-    const originalCartInfo = JSON.parse(localStorage.getItem(CART_COOKIE_KEY)) || [];
+    const originalCartInfo = getCartInfo();
 
     if (originalCartInfo.findIndex((cartInfo) => cartInfo.id === productInfo.id) !== -1) return;
     
@@ -20,10 +21,9 @@ const addCartInfo = (productInfo) => {
 
 const removeCartInfo = ({ id }) => {
     //장바구니에서 해당 물풀의 정보를 삭제
-    const originalCartInfo = JSON.parse(localStorage.getItem(CART_COOKIE_KEY)) || [];
-    const newCartInfo = originalCartInfo.filter((cartInfo) => { [1,2,3,4]
-        return cartInfo.id !== id; 
-    });
+    const originalCartInfo = getCartInfo();
+    const newCartInfo = originalCartInfo.filter((cartInfo) => cartInfo.id !== id);
+    localStorage.setItem(CART_COOKIE_KEY, JSON.stringify(newCartInfo));
 }
 
 export const getCartToggleButton = (productInfo) => {
@@ -33,14 +33,17 @@ export const getCartToggleButton = (productInfo) => {
         className : 'cart-toggle-btn',
         onclick: () => {
             if (inCart) { //이미 장바구니에 들어가 있으면
+                if (!confirm(`[${productInfo.name}]을 장바구니에서 삭제할까요?`)) return; //early-return
                 removeCartInfo(productInfo);
                 cartImage.src = 'public/assets/cart.png';
             }else { //장바구니에 없으면
                 addCartInfo(productInfo); //장바구니 넣기
                 cartImage.src = 'public/assets/cartDisabled.png';
+                if (!confirm("장바구니에 담았습니다. 장바구니 페이지로 이동할까요?")) {
+                    location.href = '/js_basic_market/cart.html';
+                }   
             }
             inCart = !inCart;
-
         }
     });
     const cartImage = makeDOMwithProperties('img', {
