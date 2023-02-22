@@ -1,6 +1,6 @@
-import { getProductList } from "./module/productList.js"
+import { getProductSection } from "./module/productSection.js";
 
-const productList = getProductList(
+const productSection = getProductSection('인기상품',
     [
         {
           "id": 1,
@@ -29,4 +29,4 @@ const productList = getProductList(
       ]
 );
 
-document.body.appendChild(productList);
+document.body.appendChild(productSection);

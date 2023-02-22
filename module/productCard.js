@@ -1,4 +1,5 @@
 import { makeDOMwithProperties } from '../utils/dom.js';
+import { getCartToggleButton } from './cartToggleButton.js';
 // import { getCartToggleButton } from './cartToggleButton.js';
 export const getProductCard = ({
   id,
@@ -15,15 +16,9 @@ export const getProductCard = ({
     src: imgSrc,
     alt: '상품 이미지',
   });
-  // const cartToggleBtn = makeDOMwithProperties('button', {
-  //   type : 'button',
-  //   className : 'cart-toggle-btn',
-  // });
-  // const cartImage = makeDOMwithProperties('img', {
-  //   src : 'public/assets/cart.png',
-  //   className: 'cart-image'
-  // });
-  // cartToggleBtn.appendChild(cartImage);
+
+  getCartToggleButton();
+
 //   const cartToggleBtn = getCartToggleButton({
 //     id,
 //     imgSrc,
