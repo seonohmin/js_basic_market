@@ -1,7 +1,7 @@
 import { makeDOMwithProperties } from '../utils/dom.js';
 import { getProductCard } from './productCard.js';
 
-export const getProductList = (productInfoList) => {
+export const getProductList = (productInfoList, removeCartCallback) => {
     if (productInfoList == null || !Array.isArray(productInfoList)) return; // 타입스크립트 필성성
     const productListContainer = makeDOMwithProperties('div',{
         className: 'product-list-con',
@@ -11,7 +11,7 @@ export const getProductList = (productInfoList) => {
         productListContainer.appendChild(
             getProductCard({
                 ...productInfo,
-            })
+            }, removeCartCallback)
         )
     });
 
